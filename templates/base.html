@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+
+{% if user.is_authenticated %}
+    {{ user }}
+    <a href="{% url 'account:profile' %}">Mon profil</a>
+    <a href="{% url 'account:logout' %}">Déconnexion</a>
+{% else %}
+    <a href="{% url 'account:login' %}">Se connecter</a>
+    <a href="{% url 'account:signup' %}">S'inscrire</a>
+{% endif %}
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

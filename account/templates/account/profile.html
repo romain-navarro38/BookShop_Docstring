@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'home' %}">Retour</a>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{{ submit_text }}">
+</form>
+
+<form action="{% url 'account:password-change' %}">
+    <button>Modifier le mot de passe</button>
+</form>
+
+<form action="{% url 'home' %}">
+    <button>Annuler</button>
+</form>
+
+{% endblock %}
