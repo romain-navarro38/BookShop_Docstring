@@ -80,3 +80,25 @@ class Book(models.Model):
         self.isbn = clean_isbn_code(self.isbn)
 
         super().save(*args, **kwargs)
+
+
+class Category(models.Model):
+    books = models.ManyToManyField(Book, verbose_name="Classements")
+    name = models.CharField(max_length=100, verbose_name="Nom")
+
+    class Meta:
+        verbose_name = "Catégorie"
+
+    def __str__(self):
+        return self.name
+
+
+class Thumbnail(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name="Livre")
+    thumbnail = models.ImageField(upload_to='books', blank=True, null=True, verbose_name='Chemin')
+
+    class Meta:
+        verbose_name = 'Image'
+
+    def __str__(self):
+        return f"{self.book.title} ({self.thumbnail.url})"
